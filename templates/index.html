@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Bienvenido al sistema catequético</h1>
+<p class="text-muted">Accede rápidamente a las diferentes secciones de tu aplicación.</p>
+
+<div class="row g-4">
+  <!-- Catequizados -->
+  <div class="col-md-3">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5>Catequizados</h5>
+        <a href="{{ url_for('lista_catequizandos') }}" class="btn btn-primary btn-sm mt-2">Lista</a>
+        <a href="{{ url_for('nuevo_catequizando') }}" class="btn btn-success btn-sm mt-2">Nuevo</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Catequistas -->
+  <div class="col-md-3">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5>Catequistas</h5>
+        <a href="{{ url_for('lista_catequistas') }}" class="btn btn-primary btn-sm mt-2">Lista</a>
+        <a href="{{ url_for('nuevo_catequista') }}" class="btn btn-success btn-sm mt-2">Nuevo</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Usuarios -->
+  <div class="col-md-3">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5>Usuarios</h5>
+        <a href="{{ url_for('lista_usuarios') }}" class="btn btn-primary btn-sm mt-2">Lista</a>
+        <a href="{{ url_for('nuevo_usuario') }}" class="btn btn-success btn-sm mt-2">Nuevo</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Inscripciones -->
+  <div class="col-md-3">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5>Inscripciones</h5>
+        <a href="{{ url_for('lista_inscripciones') }}" class="btn btn-primary btn-sm mt-2">Lista</a>
+        <a href="{{ url_for('nueva_inscripcion') }}" class="btn btn-success btn-sm mt-2">Nuevo</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Niveles -->
+  <div class="col-md-3">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5>Niveles</h5>
+        <a href="{{ url_for('lista_niveles') }}" class="btn btn-primary btn-sm mt-2">Lista</a>
+        <a href="{{ url_for('nuevo_nivel') }}" class="btn btn-success btn-sm mt-2">Nuevo</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Parroquias -->
+  <div class="col-md-3">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5>Parroquias</h5>
+        <a href="{{ url_for('lista_parroquias') }}" class="btn btn-primary btn-sm mt-2">Lista</a>
+        <a href="{{ url_for('nueva_parroquia') }}" class="btn btn-success btn-sm mt-2">Nuevo</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Roles -->
+  <div class="col-md-3">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5>Roles</h5>
+        <a href="{{ url_for('lista_roles') }}" class="btn btn-primary btn-sm mt-2">Lista</a>
+        <a href="{{ url_for('nuevo_rol') }}" class="btn btn-success btn-sm mt-2">Nuevo</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sacramentos -->
+  <div class="col-md-3">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5>Sacramentos</h5>
+        <a href="{{ url_for('lista_sacramentos') }}" class="btn btn-primary btn-sm mt-2">Lista</a>
+        <a href="{{ url_for('nuevo_sacramento') }}" class="btn btn-success btn-sm mt-2">Nuevo</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Evaluaciones -->
+  <div class="col-md-3">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5>Evaluaciones</h5>
+        <a href="{{ url_for('lista_evaluaciones') }}" class="btn btn-primary btn-sm mt-2">Lista</a>
+        <a href="{{ url_for('nueva_evaluacion') }}" class="btn btn-success btn-sm mt-2">Nueva</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Asistencias -->
+  <div class="col-md-3">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5>Asistencias</h5>
+        <a href="{{ url_for('lista_asistencias') }}" class="btn btn-primary btn-sm mt-2">Lista</a>
+        <a href="{{ url_for('nueva_asistencia') }}" class="btn btn-success btn-sm mt-2">Nueva</a>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Certificados -->
+  <div class="col-md-3">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5>Certificados</h5>
+        <a href="{{ url_for('lista_certificados') }}" class="btn btn-primary btn-sm mt-2">Lista</a>
+        <a href="{{ url_for('nuevo_certificado') }}" class="btn btn-success btn-sm mt-2">Nuevo</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Documentos -->
+  <div class="col-md-3">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5>Documentos</h5>
+        <a href="{{ url_for('lista_documentos') }}" class="btn btn-primary btn-sm mt-2">Lista</a>
+        <a href="{{ url_for('nuevo_documento') }}" class="btn btn-success btn-sm mt-2">Nuevo</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Traslados -->
+  <div class="col-md-3">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5>Traslados</h5>
+        <a href="{{ url_for('lista_traslados') }}" class="btn btn-primary btn-sm mt-2">Lista</a>
+        <a href="{{ url_for('nuevo_traslado') }}" class="btn btn-success btn-sm mt-2">Nuevo</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notificaciones -->
+  <div class="col-md-3">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5>Notificaciones</h5>
+        <a href="{{ url_for('lista_notificaciones') }}" class="btn btn-primary btn-sm mt-2">Lista</a>
+        <a href="{{ url_for('nueva_notificacion') }}" class="btn btn-success btn-sm mt-2">Nueva</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

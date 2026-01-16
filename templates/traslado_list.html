@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}Traslados{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between mb-3">
+  <h4>Traslados</h4>
+  <a class="btn btn-outline-primary" href="{{ url_for('nuevo_traslado') }}">
+    <i class="bi bi-plus-circle"></i> Nuevo
+  </a>
+</div>
+
+<table class="table table-hover align-middle">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Catequizando</th>
+      <th>Fecha</th>
+      <th>Motivo</th>
+      <th>Origen</th>
+      <th>Destino</th>
+      <th class="text-end">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for t in traslados %}
+    <tr>
+      <td>{{ t.trasladoId }}</td>
+      <td>{{ t.catequizandoId }}</td>
+      <td>{{ t.fecha }}</td>
+      <td>{{ t.motivo }}</td>
+      <td>{{ t.parroquiaOrigen }}</td>
+      <td>{{ t.parroquiaDestino }}</td>
+      <td class="text-end">
+        <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('editar_traslado', id=t._id) }}">
+          <i class="bi bi-pencil"></i>
+        </a>
+        <form method="post" action="{{ url_for('borrar_traslado', id=t._id) }}" style="display:inline" onsubmit="return confirm('¿Eliminar este traslado?')">
+          <button class="btn btn-sm btn-outline-danger">
+            <i class="bi bi-trash"></i>
+          </button>
+        </form>
+      </td>
+    </tr>
+    {% else %}
+    <tr>
+      <td colspan="7" class="text-center text-muted py-4">No hay traslados registrados</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

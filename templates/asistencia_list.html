@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}Asistencias{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between mb-3">
+  <h4>Asistencias</h4>
+  <a class="btn btn-outline-primary" href="{{ url_for('nueva_asistencia') }}">
+    <i class="bi bi-plus-circle"></i> Nueva
+  </a>
+</div>
+
+<table class="table table-hover align-middle">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Catequizando</th>
+      <th>Nivel</th>
+      <th>Fecha</th>
+      <th>Presente</th>
+      <th class="text-end">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for a in asistencias %}
+    <tr>
+      <td>{{ a.asistenciaId }}</td>
+      <td>{{ a.catequizandoId }}</td>
+      <td>{{ a.nivelId }}</td>
+      <td>{{ a.fecha }}</td>
+      <td>{{ 'Sí' if a.presente else 'No' }}</td>
+      <td class="text-end">
+        <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('editar_asistencia', id=a._id) }}">
+          <i class="bi bi-pencil"></i>
+        </a>
+        <form method="post" action="{{ url_for('borrar_asistencia', id=a._id) }}" style="display:inline" onsubmit="return confirm('¿Eliminar esta asistencia?')">
+          <button class="btn btn-sm btn-outline-danger">
+            <i class="bi bi-trash"></i>
+          </button>
+        </form>
+      </td>
+    </tr>
+    {% else %}
+    <tr>
+      <td colspan="6" class="text-center text-muted py-4">No hay asistencias registradas</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

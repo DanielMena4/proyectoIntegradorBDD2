@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}{{ 'Editar' if n else 'Nuevo' }} Nivel{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm">
+  <div class="card-header">
+    {{ 'Editar' if n else 'Nuevo' }} Nivel
+  </div>
+
+  <div class="card-body">
+    <form method="post" class="row g-3">
+
+      <div class="col-md-6">
+        <label>Nombre *</label>
+        <input class="form-control" name="nombreNivel" required value="{{ n.nombreNivel if n }}">
+      </div>
+
+      <div class="col-md-6">
+        <label>Descripción</label>
+        <input class="form-control" name="descripcion" value="{{ n.descripcion if n }}">
+      </div>
+
+      <div class="col-12 text-end mt-3">
+        <button class="btn btn-primary">
+          <i class="bi bi-save"></i> Guardar
+        </button>
+        <a class="btn btn-secondary" href="{{ url_for('lista_niveles') }}">Cancelar</a>
+      </div>
+
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}{{ 'Editar' if u else 'Nuevo' }} Usuario{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm">
+  <div class="card-header">
+    {{ 'Editar' if u else 'Nuevo' }} Usuario
+  </div>
+
+  <div class="card-body">
+    <form method="post" class="row g-3">
+
+      <div class="col-md-6">
+        <label>Nombre *</label>
+        <input class="form-control" name="nombreUsu" required value="{{ u.nombreUsu if u }}">
+      </div>
+
+      <div class="col-md-6">
+        <label>Apellido *</label>
+        <input class="form-control" name="apellidoUsu" required value="{{ u.apellidoUsu if u }}">
+      </div>
+
+      <div class="col-md-6">
+        <label>Email</label>
+        <input class="form-control" name="emailUsu" value="{{ u.emailUsu if u }}">
+      </div>
+
+      <div class="col-md-6">
+        <label>Parroquia</label>
+        <select class="form-select" name="Parroquia_parroquiaID">
+          {% for p in parroquias %}
+          <option value="{{ p.parroquiaID }}" {% if u and u.Parroquia_parroquiaID == p.parroquiaID %}selected{% endif %}>
+            {{ p.nombreParro }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-md-6">
+        <label>Rol</label>
+        <select class="form-select" name="Rol_rolId">
+          {% for r in roles %}
+          <option value="{{ r.rolId }}" {% if u and u.Rol_rolId == r.rolId %}selected{% endif %}>
+            {{ r.nombreRol }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-12 text-end mt-3">
+        <button class="btn btn-primary">
+          <i class="bi bi-save"></i> Guardar
+        </button>
+        <a class="btn btn-secondary" href="{{ url_for('lista_usuarios') }}">Cancelar</a>
+      </div>
+
+    </form>
+  </div>
+</div>
+{% endblock %}

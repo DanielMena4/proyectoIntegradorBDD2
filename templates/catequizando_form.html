@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block title %}Catequizando{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm">
+  <div class="card-header">
+    {{ 'Editar' if c else 'Nuevo' }} Catequizando
+  </div>
+
+  <div class="card-body">
+    <form method="post" class="row g-3">
+
+      <div class="col-md-6">
+        <label>Nombre *</label>
+        <input class="form-control" name="nombreCatequizando" required value="{{ c.nombreCatequizando if c }}">
+      </div>
+
+      <div class="col-md-6">
+        <label>Apellido *</label>
+        <input class="form-control" name="apellidoCatequizando" required value="{{ c.apellidoCatequizando if c }}">
+      </div>
+
+      <div class="col-md-6">
+        <label>Email</label>
+        <input class="form-control" name="emailCatequizando" value="{{ c.emailCatequizando if c }}">
+      </div>
+
+      <div class="col-md-6">
+        <label>Teléfono</label>
+        <input class="form-control" name="telefonoCatequizando" value="{{ c.telefonoCatequizando if c }}">
+      </div>
+
+      <div class="col-md-6">
+        <label>Dirección</label>
+        <input class="form-control" name="direccionCatequizando" value="{{ c.direccionCatequizando if c }}">
+      </div>
+
+      <div class="col-md-6">
+        <label>Nombre del padre</label>
+        <input class="form-control" name="nombrePadre" value="{{ c.nombrePadre if c }}">
+      </div>
+
+      <div class="col-md-6">
+        <label>Nombre de la madre</label>
+        <input class="form-control" name="nombreMadre" value="{{ c.nombreMadre if c }}">
+      </div>
+
+      <div class="col-md-6">
+        <label>Estado</label>
+        <select class="form-select" name="estado">
+          <option value="Activo" {{ 'selected' if c and c.estado=='Activo' }}>Activo</option>
+          <option value="Inactivo" {{ 'selected' if c and c.estado=='Inactivo' }}>Inactivo</option>
+        </select>
+      </div>
+
+      <div class="col-md-6">
+        <label>Fecha de nacimiento</label>
+        <input type="date" class="form-control" name="fechaNacimientoCatequizando"
+          value="{{ c.fechaNacimientoCatequizando if c }}">
+      </div>
+
+      <div class="col-md-6">
+        <label>Género</label>
+        <select class="form-select" name="genero">
+          <option value="">Seleccione</option>
+          <option value="Masculino" {{ 'selected' if c and c.genero=='Masculino' }}>Masculino</option>
+          <option value="Femenino" {{ 'selected' if c and c.genero=='Femenino' }}>Femenino</option>
+        </select>
+      </div>
+
+
+      <div class="col-12 text-end">
+        <button class="btn btn-primary">
+          <i class="bi bi-save"></i> Guardar
+        </button>
+        <a class="btn btn-secondary" href="{{ url_for('lista_catequizandos') }}">Cancelar</a>
+      </div>
+
+    </form>
+  </div>
+</div>
+{% endblock %}

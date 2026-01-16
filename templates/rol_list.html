@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}Roles{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between mb-3">
+  <h4>Roles</h4>
+  <a class="btn btn-outline-primary" href="{{ url_for('nuevo_rol') }}">
+    <i class="bi bi-plus-circle"></i> Nuevo
+  </a>
+</div>
+
+<table class="table table-hover align-middle">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre del Rol</th>
+      <th class="text-end">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for r in roles %}
+    <tr>
+      <td>{{ r.rolId }}</td>
+      <td>{{ r.nombreRol }}</td>
+      <td class="text-end">
+        <a class="btn btn-sm btn-outline-secondary"
+           href="{{ url_for('editar_rol', id=r.rolId) }}">
+           <i class="bi bi-pencil"></i>
+        </a>
+        <form method="post"
+              action="{{ url_for('borrar_rol', id=r.rolId) }}"
+              style="display:inline"
+              onsubmit="return confirm('¿Eliminar este rol?')">
+          <button class="btn btn-sm btn-outline-danger">
+            <i class="bi bi-trash"></i>
+          </button>
+        </form>
+      </td>
+    </tr>
+    {% else %}
+    <tr>
+      <td colspan="3" class="text-center text-muted py-4">
+        No hay roles registrados
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

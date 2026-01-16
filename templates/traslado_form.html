@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}Traslado{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm">
+  <div class="card-header">
+    {{ 'Editar' if t else 'Nuevo' }} Traslado
+  </div>
+
+  <div class="card-body">
+    <form method="post" class="row g-3">
+
+      <div class="col-md-4">
+        <label>ID Traslado *</label>
+        <input class="form-control" name="trasladoId" required value="{{ t.trasladoId if t }}">
+      </div>
+
+      <div class="col-md-4">
+        <label>Catequizando *</label>
+        <select class="form-select" name="catequizandoId" required>
+          <option value="">--Selecciona--</option>
+          {% for c in catequizandos %}
+          <option value="{{ c._id }}" {% if t and t.catequizandoId == c._id %}selected{% endif %}>
+            {{ c.nombreCatequizando }} {{ c.apellidoCatequizando }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-md-4">
+        <label>Fecha</label>
+        <input type="date" class="form-control" name="fecha" value="{{ t.fecha if t }}">
+      </div>
+
+      <div class="col-md-4">
+        <label>Motivo</label>
+        <input class="form-control" name="motivo" value="{{ t.motivo if t }}">
+      </div>
+
+      <div class="col-md-4">
+        <label>Parroquia Origen</label>
+        <input class="form-control" name="parroquiaOrigen" value="{{ t.parroquiaOrigen if t }}">
+      </div>
+
+      <div class="col-md-4">
+        <label>Parroquia Destino</label>
+        <input class="form-control" name="parroquiaDestino" value="{{ t.parroquiaDestino if t }}">
+      </div>
+
+      <div class="col-12">
+        <label>Observaciones</label>
+        <textarea class="form-control" name="observaciones">{{ t.observaciones if t }}</textarea>
+      </div>
+
+      <div class="col-12 text-end">
+        <button class="btn btn-primary"><i class="bi bi-save"></i> Guardar</button>
+        <a class="btn btn-secondary" href="{{ url_for('lista_traslados') }}">Cancelar</a>
+      </div>
+
+    </form>
+  </div>
+</div>
+{% endblock %}

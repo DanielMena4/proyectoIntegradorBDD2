@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% block title %}Inscripción{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm">
+  <div class="card-header">
+    {{ 'Editar' if inscripcion else 'Nueva' }} Inscripción
+  </div>
+  <div class="card-body">
+    <form method="post" class="row g-3">
+
+      <!-- Catequizando -->
+      <div class="col-md-6">
+        <label>Catequizando *</label>
+        <select class="form-select" name="catequizandoId" required>
+          <option value="">-- Seleccionar --</option>
+          {% for c in catequizandos %}
+          <option value="{{ c.catequizandoId }}"
+              {% if inscripcion and inscripcion.Catequizando_catequizandoId == c.catequizandoId %}selected{% endif %}>
+            {{ c.nombreCatequizando }} {{ c.apellidoCatequizando }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <!-- Parroquia -->
+      <div class="col-md-6">
+        <label>Parroquia *</label>
+        <select class="form-select" name="parroquiaId" required>
+          <option value="">-- Seleccionar --</option>
+          {% for p in parroquias %}
+          <option value="{{ p.parroquiaID }}"
+              {% if inscripcion and inscripcion.Parroquia_parroquiaID == p.parroquiaID %}selected{% endif %}>
+            {{ p.nombreParro }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <!-- Nivel -->
+      <div class="col-md-6">
+        <label>Nivel *</label>
+        <select class="form-select" name="nivelId" required>
+          <option value="">-- Seleccionar --</option>
+          {% for n in niveles %}
+          <option value="{{ n.nivelId }}"
+              {% if inscripcion and inscripcion.Nivel_nivelId == n.nivelId %}selected{% endif %}>
+            {{ n.nombreNivel }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <!-- Catequista -->
+      <div class="col-md-6">
+        <label>Catequista</label>
+        <select class="form-select" name="catequistaId">
+          <option value="">-- Ninguno --</option>
+          {% for ct in catequistas %}
+          <option value="{{ ct.catequistaId }}"
+              {% if inscripcion and inscripcion.Catequista_catequistaId == ct.catequistaId %}selected{% endif %}>
+            {% if ct.Usuario_usuarioId %}
+              {% for u in usuarios %}
+                {% if u.usuarioId == ct.Usuario_usuarioId %}
+                  {{ u.nombreUsu }} {{ u.apellidoUsu }}
+                {% endif %}
+              {% endfor %}
+            {% else %}
+              Catequista ID {{ ct.catequistaId }}
+            {% endif %}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <!-- Ciclo -->
+      <div class="col-md-6">
+        <label>Ciclo Inicio *</label>
+        <input type="date" class="form-control" name="cicloInicio"
+               value="{{ inscripcion.cicloInicio if inscripcion }}">
+      </div>
+
+      <div class="col-md-6">
+        <label>Ciclo Fin *</label>
+        <input type="date" class="form-control" name="cicloFin"
+               value="{{ inscripcion.cicloFin if inscripcion }}">
+      </div>
+
+      <div class="col-md-6">
+        <label>Fecha Inscripción *</label>
+        <input type="date" class="form-control" name="fechaInscripcion"
+               value="{{ inscripcion.fechaInscripcion if inscripcion }}">
+      </div>
+
+      <div class="col-12 text-end">
+        <button class="btn btn-primary">
+          <i class="bi bi-save"></i> Guardar
+        </button>
+        <a class="btn btn-secondary" href="{{ url_for('index') }}">Cancelar</a>
+      </div>
+
+    </form>
+  </div>
+</div>
+{% endblock %}

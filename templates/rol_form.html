@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}{{ 'Editar' if r else 'Nuevo' }} Rol{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm">
+  <div class="card-header">
+    {{ 'Editar' if r else 'Nuevo' }} Rol
+  </div>
+
+  <div class="card-body">
+    <form method="post" class="row g-3">
+      <div class="col-md-6">
+        <label>Nombre del Rol *</label>
+        <input class="form-control" name="nombreRol" required value="{{ r.nombreRol if r }}">
+      </div>
+
+      <div class="col-12 text-end mt-3">
+        <button class="btn btn-primary">
+          <i class="bi bi-save"></i> Guardar
+        </button>
+        <a class="btn btn-secondary" href="{{ url_for('lista_roles') }}">Cancelar</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

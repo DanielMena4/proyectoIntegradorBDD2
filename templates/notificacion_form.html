@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block title %}Notificación{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm">
+  <div class="card-header">
+    {{ 'Editar' if n else 'Nueva' }} Notificación
+  </div>
+  <div class="card-body">
+    <form method="post" class="row g-3">
+
+      <div class="col-md-3">
+        <label>ID Notificación *</label>
+        <input class="form-control" name="notificacionId" required value="{{ n.notificacionId if n }}">
+      </div>
+
+      <div class="col-md-4">
+        <label>Título</label>
+        <input class="form-control" name="titulo" value="{{ n.titulo if n }}">
+      </div>
+
+      <div class="col-md-5">
+        <label>Mensaje</label>
+        <textarea class="form-control" name="mensaje">{{ n.mensaje if n }}</textarea>
+      </div>
+
+      <div class="col-md-3">
+        <label>Fecha</label>
+        <input type="date" class="form-control" name="fecha" value="{{ n.fecha if n }}">
+      </div>
+
+      <div class="col-md-3">
+        <label>Usuario (opcional)</label>
+        <select class="form-select" name="usuarioId">
+          <option value="">--Selecciona--</option>
+          {% for u in usuarios %}
+          <option value="{{ u._id }}" {% if n and n.usuarioId == u._id %}selected{% endif %}>{{ u.username }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <label>Catequizando (opcional)</label>
+        <select class="form-select" name="catequizandoId">
+          <option value="">--Selecciona--</option>
+          {% for c in catequizandos %}
+          <option value="{{ c._id }}" {% if n and n.catequizandoId == c._id %}selected{% endif %}>{{ c.nombreCatequizando }} {{ c.apellidoCatequizando }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <label>Catequista (opcional)</label>
+        <select class="form-select" name="catequistaId">
+          <option value="">--Selecciona--</option>
+          {% for c in catequistas %}
+          <option value="{{ c._id }}" {% if n and n.catequistaId == c._id %}selected{% endif %}>{{ c.nombreCatequista }} {{ c.apellidoCatequista }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      {% if n %}
+      <div class="col-md-2 form-check mt-2">
+        <input type="checkbox" class="form-check-input" name="leida" {% if n.leida %}checked{% endif %}>
+        <label class="form-check-label">Leída</label>
+      </div>
+      {% endif %}
+
+      <div class="col-12 text-end">
+        <button class="btn btn-primary"><i class="bi bi-save"></i> Guardar</button>
+        <a class="btn btn-secondary" href="{{ url_for('lista_notificaciones') }}">Cancelar</a>
+      </div>
+
+    </form>
+  </div>
+</div>
+{% endblock %}

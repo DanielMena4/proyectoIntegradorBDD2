@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %}Evaluación{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm">
+  <div class="card-header">
+    {{ 'Editar' if e else 'Nueva' }} Evaluación
+  </div>
+
+  <div class="card-body">
+    <form method="post" class="row g-3">
+
+      <div class="col-md-4">
+        <label>ID Evaluación *</label>
+        <input class="form-control" name="evaluacionId" required value="{{ e.evaluacionId if e }}">
+      </div>
+
+      <div class="col-md-4">
+        <label>Catequizando *</label>
+        <select class="form-select" name="catequizandoId" required>
+          <option value="">--Selecciona--</option>
+          {% for c in catequizandos %}
+          <option value="{{ c._id }}" {% if e and e.catequizandoId == c._id %}selected{% endif %}>
+            {{ c.nombreCatequizando }} {{ c.apellidoCatequizando }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-md-4">
+        <label>Nivel *</label>
+        <select class="form-select" name="nivelId" required>
+          <option value="">--Selecciona--</option>
+          {% for n in niveles %}
+          <option value="{{ n._id }}" {% if e and e.nivelId == n._id %}selected{% endif %}>
+            {{ n.nombreNivel }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-md-4">
+        <label>Fecha Evaluación</label>
+        <input type="date" class="form-control" name="fechaEvaluacion" value="{{ e.fechaEvaluacion if e }}">
+      </div>
+
+      <div class="col-md-4">
+        <label>Nota</label>
+        <input type="number" step="0.01" class="form-control" name="nota" value="{{ e.nota if e }}">
+      </div>
+
+      <div class="col-12">
+        <label>Observaciones</label>
+        <textarea class="form-control" name="observaciones">{{ e.observaciones if e }}</textarea>
+      </div>
+
+      <div class="col-12 text-end">
+        <button class="btn btn-primary"><i class="bi bi-save"></i> Guardar</button>
+        <a class="btn btn-secondary" href="{{ url_for('lista_evaluaciones') }}">Cancelar</a>
+      </div>
+
+    </form>
+  </div>
+</div>
+{% endblock %}

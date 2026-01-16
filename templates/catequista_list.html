@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}Catequistas{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between mb-3">
+  <h4>Catequistas</h4>
+  <a class="btn btn-outline-primary" href="{{ url_for('nuevo_catequista') }}">
+    <i class="bi bi-person-plus"></i> Nuevo
+  </a>
+</div>
+
+<table class="table table-hover align-middle">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Teléfono</th>
+      <th>Usuario</th>
+      <th class="text-end">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for c in catequistas %}
+    <tr>
+      <td>{{ c.catequistaId }}</td>
+      <td>{{ c.nombre or '-' }}</td>
+      <td>{{ c.apellido or '-' }}</td>
+      <td>{{ c.telefonoCatequista or '-' }}</td>
+      <td>
+        {{ c.Usuario_usuarioId or '-' }}
+      </td>
+      <td class="text-end">
+        <a class="btn btn-sm btn-outline-secondary"
+           href="{{ url_for('editar_catequista', id=c.catequistaId) }}">
+           <i class="bi bi-pencil"></i>
+        </a>
+
+        <form method="post"
+              action="{{ url_for('borrar_catequista', id=c.catequistaId) }}"
+              style="display:inline"
+              onsubmit="return confirm('¿Eliminar este registro?')">
+          <button class="btn btn-sm btn-outline-danger">
+            <i class="bi bi-trash"></i>
+          </button>
+        </form>
+      </td>
+    </tr>
+    {% else %}
+    <tr>
+      <td colspan="6" class="text-center text-muted py-4">
+        No hay catequistas registrados
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

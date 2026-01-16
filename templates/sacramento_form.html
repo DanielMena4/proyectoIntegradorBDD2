@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}Sacramento{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm">
+  <div class="card-header">
+    {{ 'Editar' if s else 'Nuevo' }} Sacramento
+  </div>
+
+  <div class="card-body">
+    <form method="post" class="row g-3">
+
+      <div class="col-md-4">
+        <label>ID Sacramento *</label>
+        <input class="form-control" name="sacramentoId" required value="{{ s.sacramentoId if s }}">
+      </div>
+
+      <div class="col-md-4">
+        <label>Catequizando *</label>
+        <select class="form-select" name="catequizandoId" required>
+          <option value="">--Selecciona--</option>
+          {% for c in catequizandos %}
+          <option value="{{ c._id }}" {% if s and s.catequizandoId == c._id %}selected{% endif %}>
+            {{ c.nombreCatequizando }} {{ c.apellidoCatequizando }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-md-4">
+        <label>Tipo de Sacramento *</label>
+        <input class="form-control" name="tipoSacramento" required value="{{ s.tipoSacramento if s }}">
+      </div>
+
+      <div class="col-md-4">
+        <label>Fecha</label>
+        <input type="date" class="form-control" name="fecha" value="{{ s.fecha if s }}">
+      </div>
+
+      <div class="col-md-4">
+        <label>Lugar</label>
+        <input class="form-control" name="lugar" value="{{ s.lugar if s }}">
+      </div>
+
+      <div class="col-md-4">
+        <label>Ministro</label>
+        <input class="form-control" name="ministro" value="{{ s.ministro if s }}">
+      </div>
+
+      <div class="col-12">
+        <label>Observaciones</label>
+        <textarea class="form-control" name="observaciones">{{ s.observaciones if s }}</textarea>
+      </div>
+
+      <div class="col-12 text-end">
+        <button class="btn btn-primary"><i class="bi bi-save"></i> Guardar</button>
+        <a class="btn btn-secondary" href="{{ url_for('lista_sacramentos') }}">Cancelar</a>
+      </div>
+
+    </form>
+  </div>
+</div>
+{% endblock %}

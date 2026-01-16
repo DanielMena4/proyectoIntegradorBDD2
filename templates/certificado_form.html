@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %}Certificado{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm">
+  <div class="card-header">
+    {{ 'Editar' if c else 'Nuevo' }} Certificado
+  </div>
+  <div class="card-body">
+    <form method="post" class="row g-3">
+
+      <div class="col-md-3">
+        <label>ID Certificado *</label>
+        <input class="form-control" name="certificadoId" required value="{{ c.certificadoId if c }}">
+      </div>
+
+      <div class="col-md-4">
+        <label>Catequizando *</label>
+        <select class="form-select" name="catequizandoId" required>
+          <option value="">--Selecciona--</option>
+          {% for q in catequizandos %}
+          <option value="{{ q._id }}" {% if c and c.catequizandoId == q._id %}selected{% endif %}>{{ q.nombreCatequizando }} {{ q.apellidoCatequizando }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <label>Nivel *</label>
+        <select class="form-select" name="nivelId" required>
+          <option value="">--Selecciona--</option>
+          {% for n in niveles %}
+          <option value="{{ n._id }}" {% if c and c.nivelId == n._id %}selected{% endif %}>{{ n.nombreNivel }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <label>Parroquia *</label>
+        <select class="form-select" name="parroquiaId" required>
+          <option value="">--Selecciona--</option>
+          {% for p in parroquias %}
+          <option value="{{ p._id }}" {% if c and c.parroquiaId == p._id %}selected{% endif %}>{{ p.nombreParroquia }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <label>Fecha Emisión *</label>
+        <input type="date" class="form-control" name="fechaEmision" value="{{ c.fechaEmision if c }}" required>
+      </div>
+
+      <div class="col-md-4">
+        <label>Firmado Por</label>
+        <input class="form-control" name="firmadoPor" value="{{ c.firmadoPor if c }}">
+      </div>
+
+      <div class="col-md-4">
+        <label>Archivo</label>
+        <input class="form-control" name="archivo" value="{{ c.archivo if c }}">
+      </div>
+
+      <div class="col-12 text-end mt-3">
+        <button class="btn btn-primary"><i class="bi bi-save"></i> Guardar</button>
+        <a class="btn btn-secondary" href="{{ url_for('lista_certificados') }}">Cancelar</a>
+      </div>
+
+    </form>
+  </div>
+</div>
+{% endblock %}

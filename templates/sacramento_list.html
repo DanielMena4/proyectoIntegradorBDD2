@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}Sacramentos{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between mb-3">
+  <h4>Sacramentos</h4>
+  <a class="btn btn-outline-primary" href="{{ url_for('nuevo_sacramento') }}">
+    <i class="bi bi-plus-circle"></i> Nuevo
+  </a>
+</div>
+
+<table class="table table-hover align-middle">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Catequizando</th>
+      <th>Tipo</th>
+      <th>Fecha</th>
+      <th>Lugar</th>
+      <th>Ministro</th>
+      <th class="text-end">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for s in sacramentos %}
+    <tr>
+      <td>{{ s.sacramentoId }}</td>
+      <td>{{ s.catequizandoId }}</td>
+      <td>{{ s.tipoSacramento }}</td>
+      <td>{{ s.fecha }}</td>
+      <td>{{ s.lugar }}</td>
+      <td>{{ s.ministro }}</td>
+      <td class="text-end">
+        <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('editar_sacramento', id=s._id) }}">
+          <i class="bi bi-pencil"></i>
+        </a>
+        <form method="post" action="{{ url_for('borrar_sacramento', id=s._id) }}" style="display:inline" onsubmit="return confirm('¿Eliminar este sacramento?')">
+          <button class="btn btn-sm btn-outline-danger">
+            <i class="bi bi-trash"></i>
+          </button>
+        </form>
+      </td>
+    </tr>
+    {% else %}
+    <tr>
+      <td colspan="7" class="text-center text-muted py-4">No hay sacramentos registrados</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

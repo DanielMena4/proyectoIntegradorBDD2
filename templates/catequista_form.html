@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}{{ 'Editar' if c else 'Nuevo' }} Catequista{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm">
+  <div class="card-header">
+    {{ 'Editar' if c else 'Nuevo' }} Catequista
+  </div>
+
+  <div class="card-body">
+    <form method="post" class="row g-3">
+
+      <div class="col-md-6">
+        <label>Nombre</label>
+        <input class="form-control" name="nombre" value="{{ c.nombre if c }}">
+      </div>
+
+      <div class="col-md-6">
+        <label>Apellido</label>
+        <input class="form-control" name="apellido" value="{{ c.apellido if c }}">
+      </div>
+
+      <div class="col-md-6">
+        <label>Teléfono</label>
+        <input class="form-control" name="telefonoCatequista" value="{{ c.telefonoCatequista if c }}">
+      </div>
+
+      <div class="col-md-6">
+        <label>Usuario (opcional)</label>
+        <select class="form-select" name="Usuario_usuarioId">
+          <option value="">-- Sin usuario --</option>
+          {% for u in usuarios %}
+          <option value="{{ u.usuarioId }}" 
+            {% if c and c.Usuario_usuarioId == u.usuarioId %}selected{% endif %}>
+            {{ u.nombreUsu }} {{ u.apellidoUsu }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-12 text-end">
+        <button class="btn btn-primary">
+          <i class="bi bi-save"></i> Guardar
+        </button>
+        <a class="btn btn-secondary" href="{{ url_for('lista_catequistas') }}">Cancelar</a>
+      </div>
+
+    </form>
+  </div>
+</div>
+{% endblock %}
